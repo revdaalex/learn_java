@@ -11,7 +11,7 @@ public class CalculatorTest {
     private static Calculator calculator;
 
     /**
-     *Initialization Calculator object
+     *Initialization Calculator object.
      */
     @BeforeClass
     public static void runTest(){
@@ -19,7 +19,7 @@ public class CalculatorTest {
     }
 
     /**
-     * Test add method
+     * Test add method.
      * @throws Exception
      */
     @Test
@@ -29,7 +29,7 @@ public class CalculatorTest {
     }
 
     /**
-     * Test sub method
+     * Test sub method.
      * @throws Exception
      */
     @Test
@@ -39,7 +39,7 @@ public class CalculatorTest {
     }
 
     /**
-     * Test mult method
+     * Test mult method.
      * @throws Exception
      */
     @Test
@@ -49,7 +49,7 @@ public class CalculatorTest {
     }
 
     /**
-     * Test div method
+     * Test div method.
      * @throws Exception
      */
     @Test
