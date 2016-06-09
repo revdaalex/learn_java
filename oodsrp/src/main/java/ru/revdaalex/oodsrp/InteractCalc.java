@@ -1,4 +1,4 @@
-package ru.revdaalex.ood_srp;
+package ru.revdaalex.oodsrp;
 
 import java.util.Scanner;
 
