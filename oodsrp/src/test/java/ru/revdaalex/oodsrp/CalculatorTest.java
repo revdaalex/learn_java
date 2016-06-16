@@ -4,7 +4,10 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static org.hamcrest.core.Is.is;
+
 /**
+ * Calculator test.
  * Created by revdaalex on 09.06.2016.
  */
 public class CalculatorTest {
@@ -24,8 +27,8 @@ public class CalculatorTest {
      */
     @Test
     public void add() throws Exception {
-        int test = calculator.add(30, 27);
-        Assert.assertEquals(test, 57);
+        double test = calculator.add(30, 27);
+        Assert.assertThat(test, is(57.0));
     }
 
     /**
@@ -34,8 +37,8 @@ public class CalculatorTest {
      */
     @Test
     public void sub() throws Exception {
-        int test = calculator.sub(200, 50);
-        Assert.assertEquals(test, 150);
+        double test = calculator.sub(200, 50);
+        Assert.assertThat(test, is(150.0));
     }
 
     /**
@@ -44,8 +47,8 @@ public class CalculatorTest {
      */
     @Test
     public void mult() throws Exception {
-        int test = calculator.mult(537, 34);
-        Assert.assertEquals(test, 18258);
+        double test = calculator.mult(537, 34);
+        Assert.assertThat(test, is(18258.0));
     }
 
     /**
@@ -54,8 +57,8 @@ public class CalculatorTest {
      */
     @Test
     public void div() throws Exception {
-        int test = calculator.div(2000, 50);
-        Assert.assertEquals(test, 40);
+        double test = calculator.div(2000, 50);
+        Assert.assertThat(test, is(40.0));
     }
 
 }
