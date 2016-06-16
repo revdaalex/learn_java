@@ -1,5 +1,7 @@
 package ru.revdaalex.oodsrp;
 
+import ru.revdaalex.oodsrp.interfaces.IO;
+
 import java.util.Scanner;
 
 /**
@@ -8,13 +10,13 @@ import java.util.Scanner;
  */
 public class InteractCalc {
     /**
+     * Variable input output.
+     */
+    private final IO io;
+    /**
      * Variable calculator.
      */
     private Calculator calculator;
-    /**
-     * Variable scanner.
-     */
-    private Scanner scanner;
     /**
      * Variable calculatorMenu.
      */
@@ -26,11 +28,11 @@ public class InteractCalc {
     /**
      * Variable firstNumber.
      */
-    private int firstNumber;
+    private double first;
     /**
      * Variable secondNumber.
      */
-    private int secondNumber;
+    private double second;
     /**
      * Variable validation.
      */
@@ -39,27 +41,24 @@ public class InteractCalc {
     /**
      * main constructor.
      * @param calculator calculator.
-     * @param scanner scanner.
      * @param calculatorMenu calculatorMenu.
      */
-    public InteractCalc(Calculator calculator, Scanner scanner, CalculatorMenu calculatorMenu) {
+    public InteractCalc(Calculator calculator, CalculatorMenu calculatorMenu, IO io) {
         this.calculator = calculator;
-        this.scanner = scanner;
         this.calculatorMenu = calculatorMenu;
+        this.io = io;
     }
 
     public static void main(String[] args) {
-        Calculator calculator = new Calculator();
-        Scanner scanner = new Scanner(System.in);
-        CalculatorMenu calculatorMenu = new CalculatorMenu();
-        InteractCalc interactCalc = new InteractCalc(calculator, scanner, calculatorMenu);
-        interactCalc.start();
+        new InteractCalc(new Calculator(),
+                new CalculatorMenu(),
+                new ConsoleIO(new Scanner(System.in), System.out)).start();
     }
 
     /**
      * start method.
      */
-    private void start(){
+    public void start(){
         boolean notExit = true;
         while(notExit){
             calculatorMenu.showMenu();
@@ -84,20 +83,11 @@ public class InteractCalc {
 
     /**
      * validate user choice in main menu.
-     * @return int number of choice in meu.
+     * @return int number of choice in menu.
      */
     private int userChoice(){
-       int choice = 0;
-        isValid = true;
-        while (isValid) {
-            this.uc = scanner.nextInt();
-            if(uc == 0 || uc > 7) {
-                System.out.println("Нет такого пункта меню\nПопробуйте еще раз.");
-            } else {
-                choice = uc;
-                isValid = false;
-            }
-        } return choice;
+        MenuValidator menuValidator = new MenuValidator(io);
+        return uc = menuValidator.validMainMenu();
     }
 
     /**
@@ -105,144 +95,59 @@ public class InteractCalc {
      * @return int number of choice in CalcResultMenu.
      */
     private int validCalcResultMenu(){
-        int choice = 0;
-        isValid = true;
-        while (isValid) {
-            this.uc = scanner.nextInt();
-            if(uc == 0 || uc > 4) {
-                System.out.println("Нет такого оператора\nПопробуйте еще раз.");
-            } else {
-                choice = uc;
-                isValid = false;
-            }
-        } return choice;
+        MenuValidator menuValidator = new MenuValidator(io);
+        return uc = menuValidator.validCalcResultMenu();
     }
 
     /**
      * add method with input numbers validation.
-     * @throws NumberFormatException if failed validation.
      */
-    private void add() {
-        boolean firstCheck = true;
-        boolean secondCheck = true;
-        System.out.println("Введите первое целое число");
-        while (firstCheck) {
-            try {
-                String number = scanner.next();
-                firstNumber = Integer.parseInt(number);
-                firstCheck = false;
-            } catch (NumberFormatException e) {
-                System.out.println("Вы ввели не целое число\nПопробуйте еще раз.");
-            }
-        }
-        System.out.println("Введите второе число");
-        while (secondCheck) {
-            try {
-                String number = scanner.next();
-                secondNumber = Integer.parseInt(number);
-                secondCheck = false;
-            }catch (NumberFormatException e){
-                System.out.println("Вы ввели не целое число\nПопробуйте еще раз.");
-            }
-        }
-        calculator.add(firstNumber, secondNumber);
+    public void add(){
+        Validator validator = new Validator(io);
+        first = validator.getDouble("Введите первое число");
+        second = validator.getDouble("Введите второе число");
+        calculator.add(first, second);
         System.out.println("Результат: " + calculator.getResult());
     }
 
     /**
      * sub method with input numbers validation.
-     * @throws NumberFormatException if failed validation.
      */
     private void sub(){
-        boolean firstCheck = true;
-        boolean secondCheck = true;
-        System.out.println("Введите первое целое число");
-        while (firstCheck) {
-            try {
-                String number = scanner.next();
-                firstNumber = Integer.parseInt(number);
-                firstCheck = false;
-            } catch (NumberFormatException e) {
-                System.out.println("Вы ввели не целое число\nПопробуйте еще раз.");
-            }
-        }
-        System.out.println("Введите второе число");
-        while (secondCheck) {
-            try {
-                String number = scanner.next();
-                secondNumber = Integer.parseInt(number);
-                secondCheck = false;
-            }catch (NumberFormatException e){
-                System.out.println("Вы ввели не целое число\nПопробуйте еще раз.");
-            }
-        }
-        calculator.sub(firstNumber, secondNumber);
+        Validator validator = new Validator(io);
+        first = validator.getDouble("Введите первое число");
+        second = validator.getDouble("Введите второе число");
+        calculator.sub(first, second);
         System.out.println("Результат: " + calculator.getResult());
     }
 
     /**
      * mult method with input numbers validation.
-     * @throws NumberFormatException if failed validation.
      */
     private void mult(){
-        boolean firstCheck = true;
-        boolean secondCheck = true;
-        System.out.println("Введите первое целое число");
-        while (firstCheck) {
-            try {
-                String number = scanner.next();
-                firstNumber = Integer.parseInt(number);
-                firstCheck = false;
-            } catch (NumberFormatException e) {
-                System.out.println("Вы ввели не целое число\nПопробуйте еще раз.");
-            }
-        }
-        System.out.println("Введите второе число");
-        while (secondCheck) {
-            try {
-                String number = scanner.next();
-                secondNumber = Integer.parseInt(number);
-                secondCheck = false;
-            }catch (NumberFormatException e){
-                System.out.println("Вы ввели не целое число\nПопробуйте еще раз.");
-            }
-        }
-        calculator.mult(firstNumber, secondNumber);
+        Validator validator = new Validator(io);
+        first = validator.getDouble("Введите первое число");
+        second = validator.getDouble("Введите второе число");
+        calculator.mult(first, second);
         System.out.println("Результат: " + calculator.getResult());
     }
 
     /**
      * div method with input numbers validation.
-     * @throws NumberFormatException if failed validation.
      */
     private void div(){
-        isValid = true;
-        System.out.println("Введите первое целое число");
-        while (isValid) {
-            try {
-                String number = scanner.next();
-                firstNumber = Integer.parseInt(number);
-                isValid = false;
-            } catch (NumberFormatException e) {
-                System.out.println("Вы ввели не целое число\nПопробуйте еще раз.");
-            }
-        }
+        Validator validator = new Validator(io);
+        first = validator.getDouble("Введите первое число");
         isValid = true;
         while (isValid) {
-            System.out.println("Введите второе целое число");
-            try {
-                String number = scanner.next();
-                secondNumber = Integer.parseInt(number);
-            } catch (NumberFormatException e) {
-                System.out.println("Вы ввели не целое число\nПопробуйте еще раз.");
-            }
-            if (secondNumber == 0) {
+            second = validator.getDouble("Введите второе число");
+            if (second == 0) {
                 System.out.println("Деление на нуль не возможно!\nПовторите ввод данных.");
             } else {
                 isValid = false;
             }
         }
-        calculator.div(firstNumber, secondNumber);
+        calculator.div(first, second);
         System.out.println("Результат: " + calculator.getResult());
     }
 
@@ -260,38 +165,28 @@ public class InteractCalc {
 
     /**
      * calcResult method with input numbers validation.
-     * @throws NumberFormatException if failed validation.
      */
     private void calcResult() {
-        isValid = true;
-        System.out.println("Введите целое число");
-        while (isValid) {
-            try {
-                String number = scanner.next();
-                firstNumber = Integer.parseInt(number);
-                isValid = false;
-            } catch (NumberFormatException e) {
-                System.out.println("Вы ввели не целое число\nПопробуйте еще раз.");
-            }
-        }
+        Validator validator = new Validator(io);
+        first = validator.getDouble("Введите число");
         calculatorMenu.showCalcResultMenu();
         uc = validCalcResultMenu();
         switch (uc) {
             case 1:
-                System.out.println("Результат: " + calculator.add(firstNumber, calculator.getResult()));break;
+                System.out.println("Результат: " + calculator.add(first, calculator.getResult()));break;
 
             case 2:
-                System.out.println("Результат: " + calculator.sub(firstNumber, calculator.getResult()));break;
+                System.out.println("Результат: " + calculator.sub(first, calculator.getResult()));break;
 
             case 3:
-                System.out.println("Результат: " + calculator.mult(firstNumber, calculator.getResult()));break;
+                System.out.println("Результат: " + calculator.mult(first, calculator.getResult()));break;
 
             case 4: {
                 if (calculator.getResult() == 0){
                     System.out.println("Деление на нуль не возможно!");
 
                 }else {
-                    System.out.println("Результат: " + calculator.div(firstNumber, calculator.getResult()));
+                    System.out.println("Результат: " + calculator.div(first, calculator.getResult()));
                     break;
                 }
             }
