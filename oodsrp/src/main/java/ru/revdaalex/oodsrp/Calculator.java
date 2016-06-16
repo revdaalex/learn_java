@@ -9,7 +9,7 @@ public class Calculator {
     /**
      * final result.
      */
-    private int result;
+    private double result;
 
     /**
      * Summation of numbers.
@@ -17,7 +17,7 @@ public class Calculator {
      * @param second int second.
      * @return result.
      */
-    public int add(int first, int second){
+    public double add(double first, double second){
         return result = first + second;
     }
 
@@ -27,7 +27,7 @@ public class Calculator {
      * @param second int second.
      * @return result.
      */
-    public int sub(int first, int second){
+    public double sub(double first, double second){
         return result = first - second;
     }
 
@@ -37,7 +37,7 @@ public class Calculator {
      * @param second int second.
      * @return result.
      */
-    public int mult(int first, int second){
+    public double mult(double first, double second){
         return result = first * second;
     }
 
@@ -47,7 +47,7 @@ public class Calculator {
      * @param second int second.
      * @return result.
      */
-    public int div(int first, int second){
+    public double div(double first, double second){
         return result = first / second;
     }
 
@@ -62,7 +62,7 @@ public class Calculator {
      * Return the result.
      * @return result.
      */
-    public int getResult() {
+    public double getResult() {
         return result;
     }
 }
