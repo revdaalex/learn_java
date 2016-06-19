@@ -33,7 +33,10 @@ public class InteractCalc {
      * Variable validation.
      */
     private boolean isValid;
-
+    /**
+     * Variable String result.
+     */
+    private String result = "Результат:";
     /**
      * main constructor.
      * @param calculator calculator.
@@ -101,7 +104,7 @@ public class InteractCalc {
         first = validator.getDouble("Введите первое число");
         second = validator.getDouble("Введите второе число");
         calculator.add(first, second);
-        System.out.println("Результат: " + calculator.getResult());
+        this.io.println(String.format("%s %s", result, calculator.getResult()));
     }
 
     /**
@@ -112,7 +115,7 @@ public class InteractCalc {
         first = validator.getDouble("Введите первое число");
         second = validator.getDouble("Введите второе число");
         calculator.sub(first, second);
-        System.out.println("Результат: " + calculator.getResult());
+        this.io.println(String.format("%s %s", result, calculator.getResult()));
     }
 
     /**
@@ -123,7 +126,7 @@ public class InteractCalc {
         first = validator.getDouble("Введите первое число");
         second = validator.getDouble("Введите второе число");
         calculator.mult(first, second);
-        System.out.println("Результат: " + calculator.getResult());
+        this.io.println(String.format("%s %s", result, calculator.getResult()));
     }
 
     /**
@@ -136,13 +139,13 @@ public class InteractCalc {
         while (isValid) {
             second = validator.getDouble("Введите второе число");
             if (second == 0) {
-                System.out.println("Деление на нуль не возможно!\nПовторите ввод данных.");
+                this.io.println("Деление на нуль не возможно!\nПовторите ввод данных.");
             } else {
                 isValid = false;
             }
         }
         calculator.div(first, second);
-        System.out.println("Результат: " + calculator.getResult());
+        this.io.println(String.format("%s %s", result, calculator.getResult()));
     }
 
     /**
@@ -150,10 +153,10 @@ public class InteractCalc {
      */
     private void clear(){
         if (calculator.getResult() == 0){
-            System.out.println("Результат отсутствует");
+            this.io.println("Результат отсутствует");
         } else {
             calculator.clear();
-            System.out.println("Результат сброшен");
+            this.io.println("Результат сброшен");
         }
     }
 
@@ -168,20 +171,24 @@ public class InteractCalc {
         uc = validCalcResultMenu();
         switch (uc) {
             case 1:
-                System.out.println("Результат: " + calculator.add(first, calculator.getResult()));break;
+                calculator.add(first, calculator.getResult());
+                this.io.println(String.format("%s %s", result, calculator.getResult()));break;
 
             case 2:
-                System.out.println("Результат: " + calculator.sub(first, calculator.getResult()));break;
+                calculator.sub(first, calculator.getResult());
+                this.io.println(String.format("%s %s", result, calculator.getResult()));break;
 
             case 3:
-                System.out.println("Результат: " + calculator.mult(first, calculator.getResult()));break;
+                calculator.mult(first, calculator.getResult());
+                this.io.println(String.format("%s %s", result, calculator.getResult()));break;
 
             case 4: {
                 if (calculator.getResult() == 0){
-                    System.out.println("Деление на нуль не возможно!");
+                    this.io.println("Деление на нуль не возможно!");
 
                 }else {
-                    System.out.println("Результат: " + calculator.div(first, calculator.getResult()));
+                    calculator.div(first, calculator.getResult());
+                    this.io.println(String.format("%s %s", result, calculator.getResult()));
                     break;
                 }
             }
