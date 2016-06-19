@@ -3,7 +3,6 @@ package ru.revdaalex.oodsrp;
 import org.junit.Assert;
 import org.junit.Test;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
 
 /**
  * InteractCalc test.
@@ -17,7 +16,7 @@ public class InteractCalcTest {
     public void whenTakeSumAndExit(){
         MockIO mockIO = new MockIO(new String[]{"1", "1", "1", "7"});
         Calculator calculator = new Calculator();
-        new InteractCalc(calculator, new CalculatorMenu(), mockIO).start();
+        new InteractCalc(calculator,  mockIO).start();
         Assert.assertThat(calculator.getResult(), is(2.0));
     }
 
@@ -28,7 +27,7 @@ public class InteractCalcTest {
     public void whenTakeSubAndExit(){
         MockIO mockIO = new MockIO(new String[]{"2", "10", "5", "7"});
         Calculator calculator = new Calculator();
-        new InteractCalc(calculator, new CalculatorMenu(), mockIO).start();
+        new InteractCalc(calculator,  mockIO).start();
         Assert.assertThat(calculator.getResult(), is(5.0));
     }
 
@@ -39,7 +38,7 @@ public class InteractCalcTest {
     public void whenTakeMultAndExit(){
         MockIO mockIO = new MockIO(new String[]{"3", "10", "2", "7"});
         Calculator calculator = new Calculator();
-        new InteractCalc(calculator, new CalculatorMenu(), mockIO).start();
+        new InteractCalc(calculator,  mockIO).start();
         Assert.assertThat(calculator.getResult(), is(20.0));
     }
 
@@ -50,7 +49,7 @@ public class InteractCalcTest {
     public void whenTakeDivAndExit(){
         MockIO mockIO = new MockIO(new String[]{"4", "10", "5", "7"});
         Calculator calculator = new Calculator();
-        new InteractCalc(calculator, new CalculatorMenu(), mockIO).start();
+        new InteractCalc(calculator,  mockIO).start();
         Assert.assertThat(calculator.getResult(), is(2.0));
     }
 
@@ -61,7 +60,7 @@ public class InteractCalcTest {
     public void whenTakeSumAndSumReuseResultThenExit(){
         MockIO mockIO = new MockIO(new String[]{"1", "10", "5", "5", "5", "1", "7"});
         Calculator calculator = new Calculator();
-        new InteractCalc(calculator, new CalculatorMenu(), mockIO).start();
+        new InteractCalc(calculator,  mockIO).start();
         Assert.assertThat(calculator.getResult(), is(20.0));
     }
 
@@ -72,7 +71,7 @@ public class InteractCalcTest {
     public void whenTakeSumThenClearResultAndExit(){
         MockIO mockIO = new MockIO(new String[]{"1", "100", "30", "6", "7"});
         Calculator calculator = new Calculator();
-        new InteractCalc(calculator, new CalculatorMenu(), mockIO).start();
+        new InteractCalc(calculator,  mockIO).start();
         Assert.assertThat(calculator.getResult(), is(0.0));
     }
 }
