@@ -18,10 +18,6 @@ public class InteractCalc {
      */
     private Calculator calculator;
     /**
-     * Variable calculatorMenu.
-     */
-    private CalculatorMenu calculatorMenu;
-    /**
      * Variable user choice.
      */
     private int uc;
@@ -41,17 +37,14 @@ public class InteractCalc {
     /**
      * main constructor.
      * @param calculator calculator.
-     * @param calculatorMenu calculatorMenu.
      */
-    public InteractCalc(Calculator calculator, CalculatorMenu calculatorMenu, IO io) {
+    public InteractCalc(Calculator calculator, IO io) {
         this.calculator = calculator;
-        this.calculatorMenu = calculatorMenu;
         this.io = io;
     }
 
     public static void main(String[] args) {
         new InteractCalc(new Calculator(),
-                new CalculatorMenu(),
                 new ConsoleIO(new Scanner(System.in), System.out)).start();
     }
 
@@ -60,6 +53,7 @@ public class InteractCalc {
      */
     public void start(){
         boolean notExit = true;
+        CalculatorMenu calculatorMenu = new CalculatorMenu(io);
         while(notExit){
             calculatorMenu.showMenu();
             uc = userChoice();
@@ -167,6 +161,7 @@ public class InteractCalc {
      * calcResult method with input numbers validation.
      */
     private void calcResult() {
+        CalculatorMenu calculatorMenu = new CalculatorMenu(io);
         Validator validator = new Validator(io);
         first = validator.getDouble("Введите число");
         calculatorMenu.showCalcResultMenu();
