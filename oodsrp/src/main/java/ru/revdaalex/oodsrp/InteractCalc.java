@@ -10,6 +10,18 @@ import java.util.Scanner;
  */
 public class InteractCalc {
     /**
+     * Variable calculatorMenu.
+     */
+    private CalculatorMenu calculatorMenu;
+    /**
+     * Variable menuValidator.
+     */
+    private MenuValidator menuValidator;
+    /**
+     * Variable validator.
+     */
+    private Validator validator;
+    /**
      * Variable input output.
      */
     private final IO io;
@@ -37,13 +49,18 @@ public class InteractCalc {
      * Variable String result.
      */
     private String result = "Результат:";
+
     /**
-     * main constructor.
+     * Main constructor.
      * @param calculator calculator.
+     * @param io io.
      */
     public InteractCalc(Calculator calculator, IO io) {
         this.calculator = calculator;
         this.io = io;
+        this.calculatorMenu = new CalculatorMenu(io);
+        this.menuValidator = new MenuValidator(io);
+        this.validator = new Validator(io);
     }
 
     public static void main(String[] args) {
@@ -56,7 +73,6 @@ public class InteractCalc {
      */
     public void start(){
         boolean notExit = true;
-        CalculatorMenu calculatorMenu = new CalculatorMenu(io);
         while(notExit){
             calculatorMenu.showMenu();
             uc = userChoice();
@@ -83,8 +99,7 @@ public class InteractCalc {
      * @return int number of choice in menu.
      */
     private int userChoice(){
-        MenuValidator menuValidator = new MenuValidator(io);
-        return uc = menuValidator.validMainMenu();
+        return menuValidator.validMainMenu();
     }
 
     /**
@@ -92,15 +107,13 @@ public class InteractCalc {
      * @return int number of choice in CalcResultMenu.
      */
     private int validCalcResultMenu(){
-        MenuValidator menuValidator = new MenuValidator(io);
-        return uc = menuValidator.validCalcResultMenu();
+        return menuValidator.validCalcResultMenu();
     }
 
     /**
      * add method with input numbers validation.
      */
     public void add(){
-        Validator validator = new Validator(io);
         first = validator.getDouble("Введите первое число");
         second = validator.getDouble("Введите второе число");
         calculator.add(first, second);
@@ -111,7 +124,6 @@ public class InteractCalc {
      * sub method with input numbers validation.
      */
     private void sub(){
-        Validator validator = new Validator(io);
         first = validator.getDouble("Введите первое число");
         second = validator.getDouble("Введите второе число");
         calculator.sub(first, second);
@@ -122,7 +134,6 @@ public class InteractCalc {
      * mult method with input numbers validation.
      */
     private void mult(){
-        Validator validator = new Validator(io);
         first = validator.getDouble("Введите первое число");
         second = validator.getDouble("Введите второе число");
         calculator.mult(first, second);
@@ -133,7 +144,6 @@ public class InteractCalc {
      * div method with input numbers validation.
      */
     private void div(){
-        Validator validator = new Validator(io);
         first = validator.getDouble("Введите первое число");
         isValid = true;
         while (isValid) {
@@ -164,8 +174,6 @@ public class InteractCalc {
      * calcResult method with input numbers validation.
      */
     private void calcResult() {
-        CalculatorMenu calculatorMenu = new CalculatorMenu(io);
-        Validator validator = new Validator(io);
         first = validator.getDouble("Введите число");
         calculatorMenu.showCalcResultMenu();
         uc = validCalcResultMenu();
