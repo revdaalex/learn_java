@@ -65,7 +65,7 @@ public class InteractCalc {
 
     public static void main(String[] args) {
        new InteractCalc(new Calculator(),
-                new ConsoleIO(new Scanner(System.in), System.out)).startCalc();
+                new ConsoleIO(new Scanner(System.in), System.out)).start();
     }
 
     /**
@@ -92,10 +92,6 @@ public class InteractCalc {
                 case 7: notExit = false;break;
             }
         }
-    }
-
-    public void startCalc(){
-        start();
     }
 
     /**
