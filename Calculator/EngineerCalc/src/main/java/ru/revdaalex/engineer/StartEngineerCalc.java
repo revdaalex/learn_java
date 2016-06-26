@@ -2,12 +2,10 @@ package ru.revdaalex.engineer;
 
 import ru.revdaalex.calculator.Calculator;
 import ru.revdaalex.calculator.ConsoleIO;
-
-
 import java.util.Scanner;
 
 /**
- *
+ * Start EngineerCalc.
  * Created by revdaalex on 24.06.2016.
  */
 public class StartEngineerCalc {
