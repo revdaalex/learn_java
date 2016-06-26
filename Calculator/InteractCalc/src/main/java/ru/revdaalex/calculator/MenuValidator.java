@@ -73,7 +73,7 @@ public class MenuValidator {
         isValid = true;
         while (isValid) {
             this.uc = Integer.valueOf(this.io.read());
-            if(uc == 0 || uc > 8) {
+            if(uc == 0 || uc > 3) {
                 System.out.println("Нет такого пункта меню\nПопробуйте еще раз.");
             } else {
                 choice = uc;
@@ -91,7 +91,7 @@ public class MenuValidator {
         isValid = true;
         while (isValid) {
             this.uc = Integer.valueOf(this.io.read());
-            if(uc == 0 || uc > 3) {
+            if(uc == 0 || uc > 4) {
                 System.out.println("Нет такого оператора\nПопробуйте еще раз.");
             } else {
                 choice = uc;
