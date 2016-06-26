@@ -34,9 +34,9 @@ public class MenuValidatorTest {
      */
     @Test
     public void checkWhenTheUserSelectEngineerMenu(){
-        MockIO mockIO = new MockIO(new String[]{"7"});
+        MockIO mockIO = new MockIO(new String[]{"1"});
         MenuValidator menuValidator = new MenuValidator(mockIO);
-        Assert.assertThat(menuValidator.validEngineerMenu(), is(7));
+        Assert.assertThat(menuValidator.validEngineerMenu(), is(1));
     }
 
     /**
