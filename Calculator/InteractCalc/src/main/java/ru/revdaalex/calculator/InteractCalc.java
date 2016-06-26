@@ -99,7 +99,7 @@ public class InteractCalc {
      * @return int number of choice in menu.
      */
     private int userChoice(){
-        return menuValidator.validEngineerMenu();
+        return menuValidator.validMainMenu();
     }
 
     /**
