@@ -24,19 +24,19 @@ public class Start {
         /**
          * new Apple().
          */
-        Apple apple = new Apple("Яблоко", new GregorianCalendar(2016, 7, 25), new GregorianCalendar(2016, 7, 3), 50);
+        Apple apple = new Apple("Яблоко", new GregorianCalendar(2016, 8, 25), new GregorianCalendar(2016, 8, 3), 50);
         /**
          * new Grapes().
          */
-        Grapes grapes = new Grapes("Виноград", new GregorianCalendar(2016, 7, 10), new GregorianCalendar(2016, 7, 3), 70);
+        Grapes grapes = new Grapes("Виноград", new GregorianCalendar(2016, 8, 10), new GregorianCalendar(2016, 8, 3), 70);
         /**
          * new Cucumbers().
          */
-        Cucumbers cucumbers = new Cucumbers("Огурцы", new GregorianCalendar(2016, 7, 9), new GregorianCalendar(2016, 7, 4), 25);
+        Cucumbers cucumbers = new Cucumbers("Огурцы", new GregorianCalendar(2016, 8, 9), new GregorianCalendar(2016, 7, 30), 25);
         /**
          * new Cherries().
          */
-        Cherries cherries = new Cherries("Черешня", new GregorianCalendar(2016, 7, 8), new GregorianCalendar(2016, 6, 30), 250);
+        Cherries cherries = new Cherries("Черешня", new GregorianCalendar(2016, 8, 8), new GregorianCalendar(2016, 6, 30), 250);
         /**
          * new Tomatoes.
          */
@@ -61,21 +61,26 @@ public class Start {
          * Method sort apple.
          */
         controll.sort(apple);
+        System.out.println(apple.getExpiryDateInPercents());
         /**
          * Method sort grapes.
          */
         controll.sort(grapes);
+        System.out.println(grapes.getExpiryDateInPercents());
         /**
          * Method sort cucumbers.
          */
         controll.sort(cucumbers);
+        System.out.println(cucumbers.getExpiryDateInPercents());
         /**
          * Method sort cherries.
          */
         controll.sort(cherries);
+        System.out.println(cherries.getExpiryDateInPercents());
         /**
          * Method sort tomatoes.
          */
         controll.sort(tomatoes);
+        System.out.println(tomatoes.getExpiryDateInPercents());
     }
 }
