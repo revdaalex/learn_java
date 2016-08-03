@@ -61,26 +61,21 @@ public class Start {
          * Method sort apple.
          */
         controll.sort(apple);
-        System.out.println(apple.getExpiryDateInPercents());
         /**
          * Method sort grapes.
          */
         controll.sort(grapes);
-        System.out.println(grapes.getExpiryDateInPercents());
         /**
          * Method sort cucumbers.
          */
         controll.sort(cucumbers);
-        System.out.println(cucumbers.getExpiryDateInPercents());
         /**
          * Method sort cherries.
          */
         controll.sort(cherries);
-        System.out.println(cherries.getExpiryDateInPercents());
         /**
          * Method sort tomatoes.
          */
         controll.sort(tomatoes);
-        System.out.println(tomatoes.getExpiryDateInPercents());
     }
 }
