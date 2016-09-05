@@ -1,8 +1,7 @@
 package ru.revdaalex.lsp.chapterII.storage;
 
-import ru.revdaalex.lsp.chapterI.food.Food;
-import ru.revdaalex.lsp.chapterI.interfaces.Storage;
 import ru.revdaalex.lsp.chapterII.food.ReproductFood;
+import ru.revdaalex.lsp.chapterII.interfaces.Rstorage;
 
 import java.util.ArrayList;
 
@@ -10,43 +9,34 @@ import java.util.ArrayList;
  * ColdWarehouse class.
  * Created by revdaalex on 10.08.2016.
  */
-public class ColdWarehouse implements Storage {
+public class ColdWarehouse implements Rstorage {
     /**
      * ArrayList coldWarehouse.
      */
-    private final ArrayList<Food> coldWarehouse = new ArrayList<Food>();
-
-    /**
-     * New soet method with reproduct flag.
-     * @param reproductFood
-     * @return
-     */
-    public boolean rSortQuality(ReproductFood reproductFood) {
-        if (reproductFood.getExpiryDateInPercents() >= 100){
-            if (reproductFood.canReproduct()){
-                return true;
-            }
-        }
-        return false;
-    }
+    private final ArrayList<ReproductFood> coldWarehouse = new ArrayList<>();
 
 
     /**
      * Implements interface method add in ColdWarehouse.
-     * @param food
+     * @param
      */
-    public void add(Food food) {
-        this.coldWarehouse.add(food);
+    @Override
+    public void add(ReproductFood reproductFood) {
+        this.coldWarehouse.add(reproductFood);
     }
 
     /**
      * Implements interface method sortQuality in ColdWarehouse.
-     * @param food
+     * @param reproductFood
      * @return
      */
-    public boolean sortQuality(Food food) {
-        if (rSortQuality((ReproductFood) food)){
-            return true;
+
+    @Override
+    public boolean sortQuality(ReproductFood reproductFood) {
+        if (reproductFood.canReproduct()) {
+            if (reproductFood.getExpiryDateInPercents() >= 100) {
+                return true;
+            }
         }
         return false;
     }
@@ -55,7 +45,7 @@ public class ColdWarehouse implements Storage {
      * Get method.
      * @return arrayList.
      */
-    public ArrayList<Food> getFood() {
+    public ArrayList<ReproductFood> getFood() {
         return coldWarehouse;
     }
 }
