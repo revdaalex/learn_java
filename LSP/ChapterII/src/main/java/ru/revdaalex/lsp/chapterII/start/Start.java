@@ -1,14 +1,15 @@
 package ru.revdaalex.lsp.chapterII.start;
 
-import ru.revdaalex.lsp.chapterI.control.ControllQuality;
 import ru.revdaalex.lsp.chapterI.food.*;
-import ru.revdaalex.lsp.chapterI.interfaces.Controll;
 import ru.revdaalex.lsp.chapterI.interfaces.Storage;
 import ru.revdaalex.lsp.chapterI.storage.Shop;
 import ru.revdaalex.lsp.chapterI.storage.Trash;
+import ru.revdaalex.lsp.chapterI.storage.Warehouse;
 import ru.revdaalex.lsp.chapterII.food.Meat;
 import ru.revdaalex.lsp.chapterII.food.Milk;
 import ru.revdaalex.lsp.chapterII.food.Sausages;
+import ru.revdaalex.lsp.chapterII.interfaces.Rstorage;
+import ru.revdaalex.lsp.chapterII.rcontroll.RCotrollQuality;
 import ru.revdaalex.lsp.chapterII.storage.ColdWarehouse;
 import ru.revdaalex.lsp.chapterII.storage.NewWarehouse;
 
@@ -22,8 +23,6 @@ import java.util.GregorianCalendar;
 public class Start {
 
     public static void main(String[] args) {
-
-        ArrayList<Storage> list = new ArrayList<Storage>();
 
         Apple apple = new Apple("Яблоко", new GregorianCalendar(2016, 9, 30), new GregorianCalendar(2016, 8, 3), 50);
 
@@ -41,32 +40,20 @@ public class Start {
 
         Sausages sausages = new Sausages("Сосиски", new GregorianCalendar(2016, 7, 5), new GregorianCalendar(2016, 6, 30), 130);
 
-        list.add(new Shop());
+        RCotrollQuality rCotrollQuality = new RCotrollQuality();
+        rCotrollQuality.add(new ColdWarehouse());
+        rCotrollQuality.add(new Shop());
+        rCotrollQuality.add(new Trash());
+        rCotrollQuality.add(new Warehouse());
+        rCotrollQuality.add(new NewWarehouse());
 
-        list.add(new NewWarehouse());
-
-        list.add(new ColdWarehouse());
-
-        list.add(new Trash());
-
-        Controll controll = new ControllQuality(list);
-
-        controll.sort(apple);
-
-        controll.sort(grapes);
-
-        controll.sort(cucumbers);
-
-        controll.sort(cherries);
-
-        controll.sort(tomatoes);
-
-        controll.sort(milk);
-
-        controll.sort(meat);
-
-        controll.sort(sausages);
+        rCotrollQuality.sort(apple);
+        rCotrollQuality.sort(grapes);
+        rCotrollQuality.sort(cucumbers);
+        rCotrollQuality.sort(cherries);
+        rCotrollQuality.sort(tomatoes);
+        rCotrollQuality.rSort(milk);
+        rCotrollQuality.rSort(meat);
+        rCotrollQuality.rSort(sausages);
     }
-
-
 }
