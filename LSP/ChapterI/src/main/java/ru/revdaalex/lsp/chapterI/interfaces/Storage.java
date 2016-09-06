@@ -18,5 +18,5 @@ public interface Storage {
      * @param food
      * @return
      */
-    boolean SortQuality(Food food);
+    boolean sortQuality(Food food);
 }
