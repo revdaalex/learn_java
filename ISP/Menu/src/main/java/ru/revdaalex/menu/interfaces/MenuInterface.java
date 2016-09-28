@@ -6,11 +6,11 @@ package ru.revdaalex.menu.interfaces;
  */
 public interface MenuInterface {
 
-    void getName();
+    String getName();
 
-    void getParent();
+    String getParent();
 
-    void getMenuLevel();
+    int getMenuLevel();
 
     void setSelected();
 }
