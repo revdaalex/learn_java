@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="gameBoard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.revdaalex.tictactoe.controllers.GameController">
+   <children>
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="594.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Button fx:id="button1" layoutX="14.0" layoutY="49.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button fx:id="button2" layoutX="114.0" layoutY="49.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button fx:id="button3" layoutX="214.0" layoutY="49.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button fx:id="button4" layoutX="14.0" layoutY="149.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button fx:id="button7" layoutX="14.0" layoutY="249.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button fx:id="button5" layoutX="114.0" layoutY="149.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button fx:id="button6" layoutX="214.0" layoutY="149.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button fx:id="button8" layoutX="114.0" layoutY="249.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Button fx:id="button9" layoutX="214.0" layoutY="249.0" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font></Button>
+      <Label layoutX="339.0" layoutY="49.0" prefHeight="17.0" prefWidth="155.0" text="Кто ходит первый?" />
+      <Button fx:id="player" layoutX="326.0" layoutY="87.0" mnemonicParsing="false" onAction="#play" prefHeight="25.0" prefWidth="84.0" text="Игрок" />
+      <Button fx:id="computer" layoutX="426.0" layoutY="87.0" mnemonicParsing="false" onAction="#compFirst" prefHeight="25.0" prefWidth="84.0" text="Компьютер" />
+   </children>
+</AnchorPane>

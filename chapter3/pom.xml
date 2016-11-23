@@ -20,6 +20,8 @@
         <module>LSP</module>
         <module>Node</module>
         <module>DIP</module>
+        <module>TDD</module>
+        <module>TicTacToe</module>
     </modules>
 
     
