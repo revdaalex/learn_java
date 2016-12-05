@@ -4,8 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.util.Random;
 
 
@@ -42,6 +48,8 @@ public class GameController {
     @FXML
     private Button computer;
 
+    private Pane pane;
+
     private ObservableList<Button> buttons = FXCollections.observableArrayList();
 
     @FXML
@@ -61,6 +69,9 @@ public class GameController {
                         button.setText("X");
                     }
                 compPlay();
+                if (checkWinner()){
+                    initEndOfGame();
+                }
             });
         }
     }
@@ -86,7 +97,69 @@ public class GameController {
         player.setDisable(true);
         compPlayFirst();
         play(actionEvent);
+    }
 
+    private boolean checkWinner(){
+        // 1 Ряд
+        if (""!=button1.getText() && button1.getText() == button2.getText()
+                && button2.getText() == button3.getText()){
+            return true;
+        }
+        // 2 Ряд
+        if (""!=button4.getText() && button4.getText() == button5.getText()
+                && button5.getText() == button6.getText()){
+            return true;
+        }
+        // 3 Ряд
+        if (""!=button7.getText() && button7.getText() == button8.getText()
+                && button8.getText() == button9.getText()){
+            return true;
+        }
+        // 1 Колонка
+        if (""!=button1.getText() && button1.getText() == button4.getText()
+                && button4.getText() == button7.getText()){
+            return true;
+        }
+        // 2 Колонка
+        if (""!=button2.getText() && button2.getText() == button5.getText()
+                && button5.getText() == button8.getText()){
+            return true;
+        }
+        // 3 Колонка
+        if (""!=button3.getText() && button3.getText() == button6.getText()
+                && button6.getText() == button9.getText()){
+            return true;
+        }
+        // 1 Диагональ
+        if (""!=button1.getText() && button1.getText() == button5.getText()
+                && button5.getText() == button9.getText()){
+            return true;
+        }
+        // 2 Диагональ
+        if (""!=button3.getText() && button3.getText() == button5.getText()
+                && button5.getText() == button7.getText()){
+            return true;
+        }
+        return false;
+    }
 
+    private void initEndOfGame(){
+        try{
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/fxml/EndGame.fxml"));
+            pane = (Pane) loader.load();
+            Scene scene = new Scene(pane);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Игра закончена");
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void exit(ActionEvent actionEvent) {
+        System.exit(0);
     }
 }

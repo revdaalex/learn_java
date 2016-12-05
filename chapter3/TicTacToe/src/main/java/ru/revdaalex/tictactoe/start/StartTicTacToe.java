@@ -36,7 +36,6 @@ public class StartTicTacToe extends Application {
             rootLayout = (AnchorPane) loader.load();
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
-            GameController controller = loader.getController();
             primaryStage.setResizable(false);
             primaryStage.show();
         } catch (IOException e) {
