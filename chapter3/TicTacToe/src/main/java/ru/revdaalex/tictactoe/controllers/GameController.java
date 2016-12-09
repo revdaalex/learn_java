@@ -4,14 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
+import ru.revdaalex.tictactoe.model.Board;
+import ru.revdaalex.tictactoe.model.Point;
 import java.util.Random;
 
 
@@ -22,6 +23,8 @@ import java.util.Random;
 public class GameController {
 
     final Random random = new Random();
+
+    Board board = new Board();
 
     @FXML
     AnchorPane gameBoard;
@@ -47,13 +50,15 @@ public class GameController {
     private Button player;
     @FXML
     private Button computer;
-
-    private Pane pane;
+    @FXML
+    private Button startButton;
 
     private ObservableList<Button> buttons = FXCollections.observableArrayList();
 
     @FXML
     public void initialize(){
+        player.setDisable(true);
+        computer.setDisable(true);
     }
 
     public GameController() {
@@ -62,34 +67,45 @@ public class GameController {
     public void play(ActionEvent actionEvent) {
         player.setDisable(true);
         computer.setDisable(true);
-        buttons.addAll(button1, button2, button3, button4, button5, button6, button7, button8, button9);
+        for (Button button : buttons){
+            boolean isUsed = false;
+            button.setUserData(isUsed);
+        }
         for (Button button : buttons){
             button.setOnMouseClicked(event -> {
-                if (!button.getText().equals("X") && !button.getText().equals("O")){
+                if (((boolean) button.getUserData()) == false){
                         button.setText("X");
+                    int index = -1;
+                    for (int i = 0; i < buttons.size(); ++i) {
+                        if (button == buttons.get(i)) {
+                            index = i;
+                        }
                     }
-                compPlay();
-                if (checkWinner()){
-                    initEndOfGame();
+                    board.placeAMove(new Point(index / 3, index % 3), 1);
+                    boolean busy = true;
+                    button.setUserData(busy);
+                    for (int x = 0; x < 9; x++) {
+                        int compIndex = random.nextInt(9);
+                        if (((boolean) buttons.get(compIndex).getUserData()) == false) {
+                            buttons.get(compIndex).setText("O");
+                            buttons.get(compIndex).setUserData(busy);
+                            board.placeAMove(new Point(compIndex / 3, compIndex % 3), 2);
+                            break;
+                        }
+                    }
+                    if (board.isWin()){
+                        initEndOfGame();
+                    }
                 }
             });
         }
     }
 
-    private void compPlay() {
-        for (int index = 0; index < 9; index++) {
-            int x = random.nextInt(9);
-            if (!buttons.get(x).getText().equals("X") && !buttons.get(x).getText().equals("O")) {
-                buttons.get(x).setText("O");
-                break;
-            }
-        }
-    }
-
     private void compPlayFirst(){
-        int x = random.nextInt(9);
-        buttons.addAll(button1, button2, button3, button4, button5, button6, button7, button8, button9);
-        buttons.get(x).setText("O");
+        int index = random.nextInt(9);
+        buttons.get(index).setText("O");
+        board.placeAMove(new Point(index / 3, index % 3), 1);
+        buttons.get(index).setUserData(Boolean.TRUE);
     }
 
     public void compFirst(ActionEvent actionEvent) {
@@ -99,67 +115,42 @@ public class GameController {
         play(actionEvent);
     }
 
-    private boolean checkWinner(){
-        // 1 Ряд
-        if (""!=button1.getText() && button1.getText() == button2.getText()
-                && button2.getText() == button3.getText()){
-            return true;
+    private void initEndOfGame() {
+        Stage stage = new Stage();
+        GridPane g2 = new GridPane();
+        g2.setPadding(new Insets(20, 20, 20, 20));
+        g2.setVgap(20);
+        g2.setHgap(90);
+        Label label = new Label();
+        if (board.XWin()) {
+            label.setText("Отличная игра!");
+            stage.setTitle("Вы победили!");
+        } else if (board.OWin()){
+            label.setText("Не сегодня!");
+            stage.setTitle("Вы проиграли!");
+        } else {
+            label.setText("Победила дружба!");
+            stage.setTitle("Ничья!");
         }
-        // 2 Ряд
-        if (""!=button4.getText() && button4.getText() == button5.getText()
-                && button5.getText() == button6.getText()){
-            return true;
-        }
-        // 3 Ряд
-        if (""!=button7.getText() && button7.getText() == button8.getText()
-                && button8.getText() == button9.getText()){
-            return true;
-        }
-        // 1 Колонка
-        if (""!=button1.getText() && button1.getText() == button4.getText()
-                && button4.getText() == button7.getText()){
-            return true;
-        }
-        // 2 Колонка
-        if (""!=button2.getText() && button2.getText() == button5.getText()
-                && button5.getText() == button8.getText()){
-            return true;
-        }
-        // 3 Колонка
-        if (""!=button3.getText() && button3.getText() == button6.getText()
-                && button6.getText() == button9.getText()){
-            return true;
-        }
-        // 1 Диагональ
-        if (""!=button1.getText() && button1.getText() == button5.getText()
-                && button5.getText() == button9.getText()){
-            return true;
-        }
-        // 2 Диагональ
-        if (""!=button3.getText() && button3.getText() == button5.getText()
-                && button5.getText() == button7.getText()){
-            return true;
-        }
-        return false;
-    }
-
-    private void initEndOfGame(){
-        try{
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/fxml/EndGame.fxml"));
-            pane = (Pane) loader.load();
-            Scene scene = new Scene(pane);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("Игра закончена");
-            stage.showAndWait();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        g2.add(label, 0, 0, 2, 1);
+        Button quit = new Button("Выход");
+        g2.add(quit, 2, 1, 1, 1);
+        quit.setOnMouseClicked(event -> {
+            System.exit(0);
+        });
+        Scene scene = new Scene(g2);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void exit(ActionEvent actionEvent) {
         System.exit(0);
+    }
+
+    public void startGame(ActionEvent actionEvent) {
+        startButton.setDisable(true);
+        buttons.addAll(button1, button2, button3, button4, button5, button6, button7, button8, button9);
+        player.setDisable(false);
+        computer.setDisable(false);
     }
 }
