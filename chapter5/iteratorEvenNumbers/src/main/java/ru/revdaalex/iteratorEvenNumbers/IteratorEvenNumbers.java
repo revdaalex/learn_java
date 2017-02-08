@@ -30,7 +30,11 @@ public class IteratorEvenNumbers implements Iterator{
      * @return boolean value.
      */
     public boolean hasNext() {
-        return values.length > index;
+        if (values.length > index){
+            if(values[index]%2 == 0)
+                return true;
+        }
+        return false;
     }
 
     /**

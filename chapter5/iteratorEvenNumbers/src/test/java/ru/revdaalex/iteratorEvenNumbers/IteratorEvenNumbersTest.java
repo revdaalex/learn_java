@@ -22,14 +22,14 @@ public class IteratorEvenNumbersTest {
     }
 
     @Test
-    public void checkNextPositionValue(){
-        IteratorEvenNumbers it = new IteratorEvenNumbers(new int[]{2});
+    public void checkNextPositionValueIsEvenNumber(){
+        IteratorEvenNumbers it = new IteratorEvenNumbers(new int[]{2, 4});
 
         it.next();
         it.hasNext();
 
         boolean result = it.hasNext();
 
-        assertThat(result, is(false));
+        assertThat(result, is(true));
     }
 }
