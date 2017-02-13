@@ -23,13 +23,11 @@ public class IteratorEvenNumbersTest {
 
     @Test
     public void checkNextPositionValueIsEvenNumber(){
-        IteratorEvenNumbers it = new IteratorEvenNumbers(new int[]{2, 4});
+        IteratorEvenNumbers it = new IteratorEvenNumbers(new int[]{1, 3});
 
-        it.next();
         it.hasNext();
-
         boolean result = it.hasNext();
 
-        assertThat(result, is(true));
+        assertThat(result, is(false));
     }
 }
